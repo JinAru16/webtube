@@ -1,0 +1,29 @@
+{
+  "name": "webtube",
+  "version": "1.0.0",
+  "description": "all lectures in world",
+  "scripts": {
+    "dev": "nodemon --exec babel-node src/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JinAru16/webtube.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JinAru16/webtube/issues"
+  },
+  "homepage": "https://github.com/JinAru16/webtube#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.8",
+    "@babel/core": "^7.16.12",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.11",
+    "nodemon": "^2.0.15"
+  }
+}
