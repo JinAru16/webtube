@@ -1,0 +1,13 @@
+extends base
+include mixins/video
+
+
+
+block content 
+    h2 Today's Top Video
+    ul 
+        each video in videos 
+            +videoInfo(video)
+
+        else
+            li Sorry Noting found
