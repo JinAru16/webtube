@@ -1,3 +1,5 @@
+import { type } from "express/lib/response";
+
 let videos = [
     {
       title: "First Video",
@@ -25,19 +27,27 @@ let videos = [
     },
   ];
   
-  export const trending = (req, res) => {
-    return res.render("home", { pageTitle: "Home", videos });
+export const trending = (req, res) => {
+  return res.render("home", { pageTitle: "Home", videos });
+};
+export const watch = (req, res) => {
+  const { id } = req.params;
+  const video = videos[id - 1];
+  return res.render("watch", { pageTitle: `Watching ${video.title}`, video });
+};
+export const getEdit = (req, res) => {
+  const { id } = req.params;
+  const video = videos[id - 1];
+  res.render("edit", {pageTitle: `Edit ${video.title}`, video });
   };
-  export const watch = (req, res) => {
-    const { id } = req.params;
-    const video = videos[id - 1];
-    return res.render("watch", { pageTitle: `Watching ${video.title}`, video });
-  };
-  export const edit = (req, res) => {
-    const { id } = req.params;
-    const video = videos[id - 1];
-      res.render("edit", {pageTitle: `Edit ${video.title}`});
-    }
-  export const search = (req, res) => res.send("Search");
-  export const upload = (req, res) => res.send("Upload");
-  export const deleteVideo = (req, res) => res.send("Delete Video");
+
+export const postEdit = (req, res) => {
+  const { id } = req.params;
+  const { title } = req.body;
+  videos[id-1].title = title
+  return res.redirect(`/videos/${id}`); //redirect는 자동으로 특정 url로 보냄.
+};
+
+export const search = (req, res) => res.send("Search");
+export const upload = (req, res) => res.send("Upload");
+export const deleteVideo = (req, res) => res.send("Delete Video");

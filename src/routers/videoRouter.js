@@ -1,13 +1,14 @@
 import express from "express";
-import { watch, edit , deleteVideo, upload} from "../controllers/videoController";
+import { watch, getEdit , postEdit } from "../controllers/videoController";
 
 const videoRouter = express.Router();//비디오 보기, 비디오 올리기, 비디오 지우기 등등
 
 
 videoRouter.get("/:id(\\d+)", watch);// (\\d+)는 :id에서 숫자만 따오는거임. :id자리에 무슨 글자를 타이핑 하던 숫자만 긁어줌. 숫자+문자 조합도 안됨. 숫자만 올때 :id로 인식함
-videoRouter.get("/:id(\\d+)/edit", edit);
-videoRouter.get("/:id(\\d+)/delete", deleteVideo);
-videoRouter.get("/upload", upload);
+
+// url 하나에 get도 쓰고 post도 쓸때 유용한 방법. get을 받으면 getEdit을 실행하고. post를 받으면 postEdit을 받으란 이야기.
+videoRouter.route("/:id(\\d+)/edit").get(getEdit).post(postEdit);
+
 
 
 export default videoRouter;

@@ -2,4 +2,7 @@ extends base.pug
 
 
 block content
-    h1 Edit Video
+    h4 Change Title of Video 
+    form(method="POST") <!--action이 save를 눌렀을때 그 값들을 어디로 보낼지에 대한 명령어임 -->
+        input(name="title", placeholder="video title", value=video.title)
+        input(value="save",type="submit")
