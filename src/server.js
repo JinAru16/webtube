@@ -1,3 +1,5 @@
+import "./db"
+import "./models/Video";
 import express, { urlencoded } from "express";
 import morgan from "morgan";
 import globalRouter from "./routers/globalRouter";
@@ -18,10 +20,4 @@ app.use("/users", userRouter);
 
 
 
-
-
-// port
-const PORT = 3000;
-const handelListening = () => console.log(`Server is listening on port http://localhost:${PORT} `)
-
-app.listen(PORT, handelListening)
+export default app
