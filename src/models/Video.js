@@ -2,7 +2,7 @@ import  Mongoose  from "mongoose";
 
 const videoSchema = new Mongoose.Schema({
     title: { type: String, required: true, trim: true, maxlength: 80 },
-    description: { type: String, required: true, trim: true, minlength: 200 },
+    description: { type: String, required: true, trim: true},
     createdAt: { type: Date, required: true, default: Date.now }, //now에 ()가 안붙는 이유는 바로 함수를 바로 실행하게 두고 싶지 않아서. Video가 실행될때만 작동하게 만들기 위해 ()를 제거.
     hashtags: [{type: String, trim: true }],
     meta:{

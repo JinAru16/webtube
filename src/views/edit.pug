@@ -2,7 +2,9 @@ extends base.pug
 
 
 block content
-    h4 Change Title of Video 
+    h4 Edit Video
     form(method="POST") <!--action이 save를 눌렀을때 그 값들을 어디로 보낼지에 대한 명령어임 -->
-        input(name="title", placeholder="video title", value=video.title)
-        input(value="save",type="submit")
+        input(name="title", placeholder="Video title", value=video.title, required)
+        input(placeholder="Description", required, type="text", name="description", value=video.description)
+        input(placeholder="Hashtags, separated by comma.", required, type="text", name="hashtags", value=video.hashtags.join())
+        input(value="Save",type="submit")

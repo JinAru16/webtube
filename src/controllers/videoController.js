@@ -5,26 +5,43 @@ import Video from "../models/Video";
 export const home = async(req, res) => {
   try{
   const videos = await Video.find({});// ()속의 {}는 serch terms를 나타내는데, {}속이 비어있다면 모든 형식을 찾는다는 뜻.
-  console.log(videos);
   return res.render("home", { pageTitle: "Home", videos })
   
 } catch(error) {
     console.log(error)
   }
 };
-export const watch = (req, res) => {
+export const watch = async(req, res) => {
   const { id } = req.params;
-  const video = videos[id - 1];
-  return res.render("watch", { pageTitle: `Watching` });
+  const video = await Video.findById(id);
+  if(!video){// 만약 비디오id가 아니라면
+    return res.render("404", {pageTitle: "Video not found "});
+  };
+  return res.render("watch", { pageTitle: video.title, video: video });
+  
 };
-export const getEdit = (req, res) => {
+export const getEdit = async(req, res) => {
   const { id } = req.params;
-  res.render("edit", {pageTitle: `Edit` });
+  const video = await Video.findById(id)
+  if(!video) {
+    return res.render("404", {pageTitle: "Video not found "});
+  }
+  return res.render("edit", {pageTitle: `Edit ${video.title}`, video });
   };
 
-export const postEdit = (req, res) => {
+export const postEdit = async(req, res) => {
   const { id } = req.params;
-  const { title } = req.body;
+  const { title, description, hashtags} = req.body;
+  const video = await Video.findById(id);
+  if (!video) {
+    return res.render("404", { pageTitle: "video not found"});
+  }
+  video.title = title;
+  video.description = description;
+  video.hashtags = hashtags
+    .split(" ")
+    .map(word => word.startsWith("#") ? word : `#${word}`);// #으로 시작하면 word만  그렇지않으면(#으로 시작 안하면) #을 붙여서 출력
+  await video.save();
   return res.redirect(`/videos/${id}`); //redirect는 자동으로 특정 url로 보냄.
 };
 
