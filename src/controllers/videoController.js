@@ -70,6 +70,8 @@ export const postUpload = async(req, res) => {
     */
   });
   await video.save();
+  console.log(video)
+  console.log("video uploaded")
   return res.redirect("/");
 } catch(error) {
   console.log(error)
